@@ -2,26 +2,38 @@
   <img alt="Vue logo" src="./assets/logo.png">
   <p>{{message}}</p>
     <button v-on:click="hello()" >Log in</button>
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <input type="text" v-model="callbackurl">
+    <button v-on:click="getBookmarks()" >Get bookmarks</button>
+  <p>{{tweets}}</p>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 import axios from 'axios'
 
 export default {
   name: 'App',
   data: ()=>{
       return{
-          message:"hi"
+          message:"hi",
+          tweets:"",
+          callbackurl:""
       }
-  },
-  components: {
-    HelloWorld
-  }, methods: {
+  },methods: {
       async hello(){
           console.log("helllo")
-          this.message = await axios.get("https://8081-cs-515518291237-default.cs-europe-west1-iuzs.cloudshell.dev");
+          const response = await axios.get("http://localhost:8081/generateUrl");
+          this.message = response.data;
+          // this.message = "hello";
+      },
+      async getBookmarks(){
+          console.log(this.callbackurl);
+          const response = await axios.post("http://localhost:8081/getBookmarks", {url: this.callbackurl});
+          this.tweets = response.data;
+          //this.message = response.data;
+          // this.message = "hello";
+      },
+      onInput(e){
+        this.callbackurl = e.target.value;
       }
   }
 }
