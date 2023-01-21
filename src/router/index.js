@@ -20,9 +20,9 @@ const routes = [
     path: '/bookmarks',
     name: 'bookmarks',
     component: BookmarkView,
-    beforeEnter: (to, from, next) =>{
+    afterEach: (to) =>{
       BookmarkView.methods.getBookmarks(to)
-      next()
+      
     }
   }
 ]
