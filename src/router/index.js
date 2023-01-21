@@ -19,7 +19,11 @@ const routes = [
   {
     path: '/bookmarks',
     name: 'bookmarks',
-    component: BookmarkView
+    component: BookmarkView,
+    beforeEnter: (to, from, next) =>{
+      BookmarkView.methods.getBookmarks(to)
+      next()
+    }
   }
 ]
 
