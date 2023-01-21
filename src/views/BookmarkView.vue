@@ -2,7 +2,9 @@
     <p>Bookmarks!!!!</p>
     <p>State: {{state}}</p>
     <p>Code: {{code}}</p>
-    <p>Bookmarks: {{bookmarks}}</p>
+    <li v-for="book in bookmarks" :key="book.id">
+  {{ book }}
+</li>
 </template>
 
 <script>
@@ -13,7 +15,7 @@ export default {
     return{
           state:"",
         code: "",
-        bookmarks: "ok"
+        bookmarks: null
       }
     },
     methods: {
@@ -29,7 +31,7 @@ export default {
             console.log(params);
             const response = await axios.post("http://localhost:8081/getBookmarks", {url: params});
             console.log(response);
-            this.bookmarks = response.data[0]
+            this.bookmarks = response.data
             console.log(this.bookmarks);
         }
     },
@@ -40,7 +42,7 @@ export default {
         console.log(this.bookmarks);
         const response = await axios.post("http://localhost:8081/getBookmarks", {url: params});
         console.log(response);
-        this.bookmarks = response.data[0]
+        this.bookmarks = response.data
     } 
 }
 </script>
