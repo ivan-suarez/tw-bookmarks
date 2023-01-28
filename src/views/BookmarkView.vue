@@ -2,14 +2,16 @@
     <p>Bookmarks!!!!</p>
     <p>State: {{state}}</p>
     <p>Code: {{code}}</p>
+    <button @click="exportToPDF">Export to PDF</button>
+    <div id="element-to-convert">
     <bookmark-item v-for='item in bookmarks' :item='item' :key='item.id'></bookmark-item>
-
+    </div>
 </template>
 
 <script>
 import axios from 'axios'
 import BookmarkItem from '../components/BookmarkItem.vue'
-
+import html2pdf from "html2pdf.js"
 export default {
   components: { BookmarkItem },
     data: () =>{
@@ -20,6 +22,9 @@ export default {
       }
     },
     methods: {
+      exportToPDF() {
+			html2pdf(document.getElementById('element-to-convert'));
+		},
         async getBookmarks(params){
             console.log(params.query);
             const { state, code } = params.query;
