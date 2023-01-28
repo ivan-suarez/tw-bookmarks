@@ -2,15 +2,16 @@
     <p>Bookmarks!!!!</p>
     <p>State: {{state}}</p>
     <p>Code: {{code}}</p>
-    <li v-for="book in bookmarks" :key="book.id">
-  {{ book }}
-</li>
+    <bookmark-item v-for='item in bookmarks' :item='item' :key='item.id'></bookmark-item>
+
 </template>
 
 <script>
 import axios from 'axios'
+import BookmarkItem from '../components/BookmarkItem.vue'
 
 export default {
+  components: { BookmarkItem },
     data: () =>{
     return{
           state:"",
