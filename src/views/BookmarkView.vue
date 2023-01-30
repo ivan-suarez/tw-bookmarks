@@ -35,7 +35,7 @@ export default {
             //const response = await axios.get("http://localhost:8081/generateUrl");
             console.log('sending this');
             console.log(params);
-            const response = await axios.post("http://localhost:8081/getBookmarks", {url: params});
+            const response = await axios.post(`${process.env.VUE_APP_BACKEND_URI}/getBookmarks`, {url: params});
             console.log(response);
             this.bookmarks = response.data
             console.log(this.bookmarks);
@@ -46,7 +46,7 @@ export default {
         console.log(this.$route.query);
         const params = this.$route;
         console.log(this.bookmarks);
-        const response = await axios.post("http://localhost:8081/getBookmarks", {url: params});
+        const response = await axios.post(`${process.env.VUE_APP_BACKEND_URI}/getBookmarks`, {url: params});
         console.log(response);
         this.bookmarks = response.data
     } 
