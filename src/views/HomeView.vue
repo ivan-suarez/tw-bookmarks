@@ -25,7 +25,7 @@ export default {
   methods: {
     async hello(){
       console.log("helllo")
-      const response = await axios.get("http://localhost:8081/generateUrl");
+      const response = await axios.get(`${process.env.VUE_APP_BACKEND_URI}/generateUrl`);
       this.message = response.data;
       window.location.href = this.message;
     }
